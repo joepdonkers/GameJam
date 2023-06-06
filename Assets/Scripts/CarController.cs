@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float moveSpeed = 10f;
+    public float rotationSpeed = 100f;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        // Get input axes
+        float moveAxis = Input.GetAxis("Vertical");
+        float rotationAxis = Input.GetAxis("Horizontal");
+
+        // Move the car forward or backward
+        transform.Translate(Vector3.forward * moveAxis * moveSpeed * Time.deltaTime);
+
+        // Rotate the car
+        transform.Rotate(Vector3.up * rotationAxis * rotationSpeed * Time.deltaTime);
     }
 }
