@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform target; // The object the camera will follow
-    public float smoothSpeed = 0.125f; // The smoothing factor for camera movement
+    public float smoothSpeed = 8f; // The smoothing factor for camera movement
     public Vector3 offset; // The offset from the target's position
 
     void LateUpdate()
