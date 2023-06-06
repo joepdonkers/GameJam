@@ -34,11 +34,12 @@ public class CarController : MonoBehaviour
         if (isDisabled)
             return;
 
-        if (other.gameObject.CompareTag("Pick Up"))
-        {
-            onPickupCollision.Invoke();
-        }
-        else if (other.gameObject.CompareTag("Obstacle"))
+        // if (other.gameObject.CompareTag("Pick Up"))
+        // {
+        //     onPickupCollision.Invoke();
+        // }
+        // else
+         if (other.gameObject.CompareTag("Obstacle"))
         {
             onEnemyCollision.Invoke();
             DisableCar();
