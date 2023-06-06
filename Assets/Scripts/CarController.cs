@@ -10,7 +10,7 @@ public class CarController : MonoBehaviour
     public float driftIntensity = 0.1f;
     public float driftMultiplier = 5f;
 
-    public UnityEvent onPickupCollision;
+    public UnityEvent onFinishCollision;
     public UnityEvent onEnemyCollision;
 
     private bool isDisabled = false;
@@ -51,6 +51,11 @@ public class CarController : MonoBehaviour
             onEnemyCollision.Invoke();
             DisableCar();
         }
+        else if (other.gameObject.CompareTag("Finish"))
+        {
+            onFinishCollision.Invoke();
+            DisableCar();
+        }
     }
 
     private void DisableCar()
@@ -58,10 +63,10 @@ public class CarController : MonoBehaviour
         isDisabled = true;
         gameObject.SetActive(false);
 
-        ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem ps in particleSystems)
-        {
-            ps.Stop();
-        }
+        // ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
+        // foreach (ParticleSystem ps in particleSystems)
+        // {
+        //     ps.Stop();
+        // }
     }
 }
