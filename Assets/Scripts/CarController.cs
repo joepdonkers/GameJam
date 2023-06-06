@@ -45,9 +45,15 @@ public class CarController : MonoBehaviour
         }
     }
 
-    private void DisableCar()
+private void DisableCar()
+{
+    isDisabled = true;
+    gameObject.SetActive(false);
+
+    ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
+    foreach (ParticleSystem ps in particleSystems)
     {
-        isDisabled = true;
-        gameObject.SetActive(false);
+        ps.Stop();
     }
+}
 }
