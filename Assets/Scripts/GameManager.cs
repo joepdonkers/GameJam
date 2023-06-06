@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public Text loseText;
     public int ScoreToWin;
+    public ParticleSystem particleSystem; // Reference to the particle system
 
     void Start()
     {
         loseText.text = "";
-        
     }
 
     public void Win()
@@ -19,8 +19,17 @@ public class GameManager : MonoBehaviour
         loseText.text = "You Win!";
     }
 
-    public void die()
+    public void Die()
     {
         loseText.text = "You Lose!";
+        PlayParticleEffect();
+    }
+
+    public void PlayParticleEffect()
+    {
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+        }
     }
 }
