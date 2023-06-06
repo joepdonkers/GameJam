@@ -2,22 +2,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
-    private Vector3 offset;
+    public Transform target; // The object to follow
+    public Vector3 offset; // The offset from the target position
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        offset = transform.position - player.transform.position; // Offset is the distance between the camera and the player
-    }
-
-    // LateUpdate is called after all Update functions have been called
     void LateUpdate()
     {
-        // Calculate the target position for the camera
-        Vector3 targetPosition = player.transform.position + offset;
+        if (target != null)
+        {
+            // Calculate the desired position for the camera
+            Vector3 desiredPosition = target.position + offset;
 
-        // Set the camera's position to the target position
-        transform.position = targetPosition;
+            // Smoothly move the camera towards the desired position
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime);
+        }
     }
 }
