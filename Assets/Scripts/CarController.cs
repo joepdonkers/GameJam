@@ -7,49 +7,60 @@ public class CarController : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public float rotationSpeed = 100f;
+    public float driftIntensity = 0.1f;
 
     public UnityEvent onPickupCollision;
     public UnityEvent onEnemyCollision;
 
     private bool isDisabled = false;
+    private Rigidbody carRigidbody;
+
+    private void Awake()
+    {
+        carRigidbody = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
         if (!isDisabled)
         {
-            // Get input axes
-            float moveAxis = Input.GetAxis("Vertical");
-            float rotationAxis = Input.GetAxis("Horizontal");
-
-            // Move the car forward or backward
-            transform.Translate(Vector3.forward * moveAxis * moveSpeed * Time.deltaTime);
+            // Move the car forward
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
 
             // Rotate the car
+            float rotationAxis = Input.GetAxis("Horizontal");
             transform.Rotate(Vector3.up * rotationAxis * rotationSpeed * Time.deltaTime);
+
+            // Apply drift force
+            if (Mathf.Abs(rotationAxis) > 0.1f)
+            {
+                Vector3 driftForce = -transform.right * rotationAxis * driftIntensity;
+                carRigidbody.AddForce(driftForce, ForceMode.Acceleration);
+            }
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (isDisabled)
             return;
 
-         if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.CompareTag("Obstacle"))
         {
             onEnemyCollision.Invoke();
             DisableCar();
         }
     }
 
-private void DisableCar()
-{
-    isDisabled = true;
-    gameObject.SetActive(false);
-
-    ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
-    foreach (ParticleSystem ps in particleSystems)
+    private void DisableCar()
     {
-        ps.Stop();
+        isDisabled = true;
+        gameObject.SetActive(false);
+
+        ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem ps in particleSystems)
+        {
+            ps.Stop();
+        }
     }
-}
 }
