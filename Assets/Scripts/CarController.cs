@@ -7,11 +7,19 @@ public class CarController : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public float rotationSpeed = 100f;
+    public float driftIntensity = 0.1f;
+    public float driftMultiplier = 5f;
 
     public UnityEvent onPickupCollision;
     public UnityEvent onEnemyCollision;
 
     private bool isDisabled = false;
+    private Rigidbody carRigidbody;
+
+    private void Awake()
+    {
+        carRigidbody = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
@@ -23,10 +31,17 @@ public class CarController : MonoBehaviour
             // Rotate the car
             float rotationAxis = Input.GetAxis("Horizontal");
             transform.Rotate(Vector3.up * rotationAxis * rotationSpeed * Time.deltaTime);
+
+            // Apply drift force
+            if (Mathf.Abs(rotationAxis) > 0.1f)
+            {
+                Vector3 driftForce = -transform.right * rotationAxis * driftIntensity * driftMultiplier;
+                carRigidbody.AddForce(driftForce, ForceMode.Acceleration);
+            }
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (isDisabled)
             return;
