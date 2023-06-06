@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - HideObjects
   - Obstacle
+  - Car
   layers:
   - Default
   - TransparentFX

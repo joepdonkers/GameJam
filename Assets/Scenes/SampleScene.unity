@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 866132388}
-  smoothSpeed: 8
+  smoothSpeed: 12
   offset: {x: 0, y: 0, z: 0}
 --- !u!114 &1452620041
 MonoBehaviour:
@@ -1572,6 +1572,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car
       objectReference: {fileID: 0}
+    - target: {fileID: 7050357488374232072, guid: 6b05111eb83bb644c9c3a792bd44c5f4, type: 3}
+      propertyPath: m_TagString
+      value: Car
+      objectReference: {fileID: 0}
     - target: {fileID: 8342603822040435059, guid: 6b05111eb83bb644c9c3a792bd44c5f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1594,6 +1598,7 @@ GameObject:
   - component: {fileID: 1915746058}
   - component: {fileID: 1915746057}
   - component: {fileID: 1915746056}
+  - component: {fileID: 1915746060}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Ground
@@ -1680,6 +1685,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915746060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915746055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b528d34a73b11994cb993374201ce06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slipperyMaterial: {fileID: 13400000, guid: bbc619f311eb7974197c466bd195c64c, type: 2}
 --- !u!1 &1930873771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,7 +1945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673ac92466be8224b9333b34fc41d6fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 25
   rotationSpeed: 100
   onPickupCollision:
     m_PersistentCalls:
